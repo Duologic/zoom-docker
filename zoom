@@ -13,6 +13,7 @@ if [[ $(docker ps -f "name=$name" --format '{{.Names }}') != $name ]]; then
         --name $name \
         --device /dev/video0 \
         -v ${SSH_AUTH}:/home/zoom/.ssh \
+        -v ${HOME}/.config/zoom-config:/home/zoom/.zoom \
         -v ${HOME}/.config/zoom-config:/home/zoom/.config \
         zoom
     sleep 5
