@@ -1,0 +1,25 @@
+#!/bin/bash
+set -euo pipefail
+
+name=ermine_zoom
+port=2223
+
+if [[ $(docker ps -f "name=$name" --format '{{.Names }}') != $name ]]; then
+    SSH_AUTH=$(mktemp -d)
+    cat ${HOME}/.ssh/id_rsa.pub > ${SSH_AUTH}/authorized_keys
+    docker run --rm -d \
+        -p 127.0.0.1:$port:22 \
+        --hostname $name \
+        --name $name \
+        --device /dev/video0 \
+        -v ${SSH_AUTH}:/home/zoom/.ssh \
+        -v ${HOME}/.config/zoom-config:/home/zoom/.config \
+        zoom
+    sleep 5
+fi
+
+ssh -X -f \
+    -R 64713:127.0.0.1:4713 \
+    -p $port \
+    zoom@127.0.0.1 \
+    zoom-forward "$@"

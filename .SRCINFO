@@ -1,0 +1,14 @@
+pkgbase = zoom-docker
+	pkgdesc = .desktop file for running Zoom in Docker
+	pkgver = 0.0.1
+	pkgrel = 0
+	arch = x86_64
+	license = MIT
+	optdepends = xdg-utils
+	source = ZoomDocker.desktop
+	source = zoom
+	sha512sums = SKIP
+	sha512sums = SKIP
+
+pkgname = zoom-docker
+

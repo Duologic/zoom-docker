@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+export PULSE_SERVER="tcp:localhost:64713"
+
+function finish {
+    kill $(pidof dbus-daemon)
+    kill $(pidof dbus-launch)
+}
+trap finish EXIT
+
+zoom "$@"
