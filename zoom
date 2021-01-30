@@ -19,6 +19,8 @@ if [[ $(docker ps -f "name=$name" --format '{{.Names }}') != $name ]]; then
     sleep 5
 fi
 
+pactl load-module module-native-protocol-tcp auth-ip-acl=127.0.0.1 auth-anonymous=1
+
 ssh -X -f \
     -R 64713:127.0.0.1:4713 \
     -p $port \
